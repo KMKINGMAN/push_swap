@@ -6,52 +6,13 @@
 /*   By: mkurkar <mkurkar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 15:40:12 by mkurkar           #+#    #+#             */
-/*   Updated: 2024/12/24 16:03:37 by mkurkar          ###   ########.fr       */
+/*   Updated: 2024/12/27 15:08:11 by mkurkar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../include/push_swap.h"
 
-void ra(t_stack *stack_a, int print)
-{
-    if (stack_a->size < 2)
-        return;
-    
-    t_node *first = stack_a->top;
-    t_node *last = stack_a->top;
-    
-    // Find the last node
-    while (last->next)
-        last = last->next;
-    
-    // Update top to second element
-    stack_a->top = first->next;
-    // Make first node the last node
-    first->next = NULL;
-    last->next = first;
-    
-    if (print)
-        write(1, "ra\n", 3);
-}
 
-void rb(t_stack *stack_b, int print)
-{
-    if (stack_b->size < 2)
-        return;
-    
-    t_node *first = stack_b->top;
-    t_node *last = stack_b->top;
-    
-    while (last->next)
-        last = last->next;
-    
-    stack_b->top = first->next;
-    first->next = NULL;
-    last->next = first;
-    
-    if (print)
-        write(1, "rb\n", 3);
-}
 
 void rr(t_stack *stack_a, t_stack *stack_b)
 {
@@ -62,7 +23,7 @@ void rr(t_stack *stack_a, t_stack *stack_b)
 
 void rra(t_stack *stack_a, int print)
 {
-    if (stack_a->size < 2)
+    if (!stack_a || !stack_a->top || !stack_a->top->next)
         return;
     
     t_node *last = stack_a->top;
@@ -86,7 +47,7 @@ void rra(t_stack *stack_a, int print)
 
 void rrb(t_stack *stack_b, int print)
 {
-    if (stack_b->size < 2)
+    if (!stack_b || !stack_b->top || !stack_b->top->next)
         return;
     
     t_node *last = stack_b->top;

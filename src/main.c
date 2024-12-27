@@ -6,13 +6,14 @@
 /*   By: mkurkar <mkurkar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 15:35:13 by mkurkar           #+#    #+#             */
-/*   Updated: 2024/12/26 21:06:42 by mkurkar          ###   ########.fr       */
+/*   Updated: 2024/12/27 15:07:41 by mkurkar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../include/push_swap.h"
 #include <unistd.h>
 #include <stdlib.h>
+#include <limits.h>
 
 static int is_number(char *str)
 {
@@ -23,6 +24,28 @@ static int is_number(char *str)
     while (str[i])
     {
         if (str[i] < '0' || str[i] > '9')
+            return 0;
+        i++;
+    }
+    return 1;
+}
+
+static int is_valid_integer(char *str)
+{
+    long num = 0;
+    int sign = 1;
+    int i = 0;
+    
+    if (str[i] == '-')
+    {
+        sign = -1;
+        i++;
+    }
+    
+    while (str[i])
+    {
+        num = num * 10 + (str[i] - '0');
+        if ((sign == 1 && num > INT_MAX) || (sign == -1 && -num < INT_MIN))
             return 0;
         i++;
     }
@@ -68,7 +91,7 @@ int main(int argc, char **argv)
     // Parse arguments in reverse to maintain order
     for (int i = argc - 1; i > 0; i--)
     {
-        if (!is_number(argv[i]))
+        if (!is_number(argv[i]) || !is_valid_integer(argv[i]))
         {
             write(2, "Error\n", 6);
             free_stack(stack_a);

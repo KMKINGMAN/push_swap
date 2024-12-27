@@ -6,11 +6,11 @@
 /*   By: mkurkar <mkurkar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 15:34:43 by mkurkar           #+#    #+#             */
-/*   Updated: 2024/12/26 21:22:53 by mkurkar          ###   ########.fr       */
+/*   Updated: 2024/12/27 15:00:57 by mkurkar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../include/push_swap.h"
 
 // Helper function to check if stack is sorted
 static inline int is_sorted(t_stack *stack)
@@ -95,7 +95,7 @@ static void sort_three_nodes(t_stack *stack)
         rra(stack, 1);
 }
 
-static void quick_sort(t_stack *stack_a, t_stack *stack_b, int len)
+void quick_sort(t_stack *stack_a, t_stack *stack_b, int len)
 {
     if (len <= 3)
     {

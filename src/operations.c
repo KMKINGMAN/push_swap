@@ -6,11 +6,11 @@
 /*   By: mkurkar <mkurkar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 15:34:16 by mkurkar           #+#    #+#             */
-/*   Updated: 2024/12/26 21:22:53 by mkurkar          ###   ########.fr       */
+/*   Updated: 2024/12/27 15:03:46 by mkurkar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../include/push_swap.h"
 
 // Stack management operations
 t_stack *create_stack(void)

@@ -1,20 +1,22 @@
-#include "push_swap.h"
+#include "../include/push_swap.h"
 
 int get_stack_size(t_stack *stack)
 {
-    int count = 0;
-    t_node *current = stack->top;
-    
-    while (current)
-    {
-        count++;
-        current = current->next;
-    }
-    return count;
+    return stack->size;  // Use the size field we're already tracking
 }
 
 void sort_three(t_stack *stack_a)
 {
+    if (!stack_a || stack_a->size < 2)
+        return;
+    
+    if (stack_a->size == 2)
+    {
+        if (stack_a->top->value > stack_a->top->next->value)
+            sa(stack_a, 1);
+        return;
+    }
+
     int first = stack_a->top->value;
     int second = stack_a->top->next->value;
     int third = stack_a->top->next->next->value;
@@ -87,6 +89,9 @@ void sort_five(t_stack *stack_a, t_stack *stack_b)
 
 void sort_large_stack(t_stack *stack_a, t_stack *stack_b)
 {
+    if (!stack_a || stack_a->size < 2)
+        return;
+    
     int size = get_stack_size(stack_a);
     int max_bits = 0;
     int num = size - 1;
