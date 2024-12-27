@@ -6,7 +6,7 @@
 /*   By: mkurkar <mkurkar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 15:35:13 by mkurkar           #+#    #+#             */
-/*   Updated: 2024/12/27 15:07:41 by mkurkar          ###   ########.fr       */
+/*   Updated: 2024/12/27 15:15:29 by mkurkar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,20 @@ static int is_number(char *str)
 {
     int i = 0;
     
-    if (str[i] == '-')
+    if (!str[0])
+        return 0;
+    
+    if (str[i] == '-' || str[i] == '+')
         i++;
+    
+    // Check for lone zero or multiple zeros
+    if (str[i] == '0' && str[i + 1] != '\0')
+        return 0;
+        
+    // Must have at least one digit
+    if (!str[i])
+        return 0;
+    
     while (str[i])
     {
         if (str[i] < '0' || str[i] > '9')
@@ -36,19 +48,23 @@ static int is_valid_integer(char *str)
     int sign = 1;
     int i = 0;
     
-    if (str[i] == '-')
+    // Handle sign
+    if (str[i] == '-' || str[i] == '+')
     {
-        sign = -1;
+        sign = (str[i] == '-') ? -1 : 1;
         i++;
     }
     
+    // Convert to number and check overflow
     while (str[i])
     {
-        num = num * 10 + (str[i] - '0');
-        if ((sign == 1 && num > INT_MAX) || (sign == -1 && -num < INT_MIN))
+        num = (num * 10) + (str[i] - '0');
+        if ((sign == 1 && num > INT_MAX) || 
+            (sign == -1 && num > -(long)INT_MIN))
             return 0;
         i++;
     }
+    
     return 1;
 }
 
@@ -63,6 +79,21 @@ int check_duplicates(t_stack *stack, int num)
         current = current->next;
     }
     return 0;
+}
+
+static int is_already_sorted(t_stack *stack)
+{
+    if (!stack || !stack->top)
+        return 1;
+        
+    t_node *current = stack->top;
+    while (current->next)
+    {
+        if (current->value >= current->next->value)
+            return 0;
+        current = current->next;
+    }
+    return 1;
 }
 
 void sort_based_on_size(t_stack *stack_a, t_stack *stack_b)
@@ -111,7 +142,9 @@ int main(int argc, char **argv)
         push(stack_a, num);
     }
     
-    sort_based_on_size(stack_a, stack_b);
+    // Only sort if not already sorted and more than one element
+    if (!is_already_sorted(stack_a) && stack_a->size > 1)
+        sort_based_on_size(stack_a, stack_b);
     
     free_stack(stack_a);
     free_stack(stack_b);
