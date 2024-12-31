@@ -6,7 +6,7 @@
 /*   By: mkurkar <mkurkar@student.42amman.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 15:18:32 by mkurkar           #+#    #+#             */
-/*   Updated: 2024/12/27 15:18:57 by mkurkar          ###   ########.fr       */
+/*   Updated: 2024/12/31 16:43:25 by mkurkar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int get_stack_size(t_stack *stack)
 {
-    return stack->size;  // Use the size field we're already tracking
+    return stack->size;
 }
 
 void sort_three(t_stack *stack_a)

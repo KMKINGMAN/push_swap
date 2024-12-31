@@ -1,0 +1,44 @@
+# Executable
+push_swap
+checker
+
+# Object files
+*.o
+obj/
+*.obj
+
+# Libraries
+*.lib
+*.a
+
+# Debug files
+*.dSYM/
+*.su
+*.idb
+*.pdb
+
+# Build directories
+bin/
+build/
+
+# IDE specific files
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# Dependency files
+*.d
+
+# Temp files
+*.tmp
+*~
+
+# Test files
+test
+test.c
+
+# Project specific
+checker_Mac
+checker_linux
