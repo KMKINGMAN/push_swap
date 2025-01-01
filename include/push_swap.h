@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mkurkar <mkurkar@student.42amman.com>      +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/24 15:33:15 by mkurkar           #+#    #+#             */
-/*   Updated: 2024/12/31 16:53:16 by mkurkar          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
@@ -33,6 +21,8 @@ t_stack *create_stack(void);
 void    push(t_stack *stack, int value);
 int     pop(t_stack *stack);
 void    free_stack(t_stack *stack);
+void    swap(t_stack *stack);
+void    rotate(t_stack *stack);
 
 // Basic operations
 void    sa(t_stack *stack_a, int print);
@@ -54,9 +44,5 @@ int     get_stack_size(t_stack *stack);
 void    sort_three(t_stack *stack_a);
 void    sort_five(t_stack *stack_a, t_stack *stack_b);
 void sort_large_stack(t_stack *stack_a, t_stack *stack_b);
-void    sort_stack(t_stack *stack_a, t_stack *stack_b);
-
-int     find_min(t_stack *stack);
-int     find_max(t_stack *stack);
 
 #endif
