@@ -6,7 +6,7 @@
 /*   By: mkurkar <mkurkar@student.42amman.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 15:35:13 by mkurkar           #+#    #+#             */
-/*   Updated: 2025/01/07 18:16:20 by mkurkar          ###   ########.fr       */
+/*   Updated: 2025/01/07 18:30:44 by mkurkar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,8 +129,29 @@ static int	process_number(char *str, t_stack *stack_a)
 	if (check_duplicates(stack_a, num))
 		return (0);
 	push(stack_a, num);
-	ra(stack_a, 0);
 	return (1);
+}
+
+void reverse_array(char **arr)
+{
+	int i;
+	int j;
+	char *temp;
+
+	i = 0;
+	j = 0;
+	while (arr[j])
+		j++;
+	j--;
+	while (i < j)
+	{
+		temp = arr[i];
+		arr[i] = arr[j];
+		arr[j] = temp;
+		i++;
+		j--;
+	}
+	
 }
 
 static int	process_argument(char *arg, t_stack *stack_a)
@@ -140,6 +161,7 @@ static int	process_argument(char *arg, t_stack *stack_a)
 	int		success;
 
 	numbers = ft_split(arg, ' ');
+	reverse_array(numbers);
 	if (!numbers)
 		return (0);
 	success = 1;
