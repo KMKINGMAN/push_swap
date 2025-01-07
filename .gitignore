@@ -42,3 +42,4 @@ test.c
 # Project specific
 checker_Mac
 checker_linux
+push_swap_visualizer/

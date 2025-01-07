@@ -7,6 +7,7 @@
 typedef struct s_node
 {
     int             value;
+    int             counter;
     struct s_node   *next;
 } t_node;
 
@@ -21,8 +22,6 @@ t_stack *create_stack(void);
 void    push(t_stack *stack, int value);
 int     pop(t_stack *stack);
 void    free_stack(t_stack *stack);
-void    swap(t_stack *stack);
-void    rotate(t_stack *stack);
 
 // Basic operations
 void    sa(t_stack *stack_a, int print);
@@ -43,6 +42,6 @@ int     get_stack_size(t_stack *stack);
 // Sorting functions
 void    sort_three(t_stack *stack_a);
 void    sort_five(t_stack *stack_a, t_stack *stack_b);
-void sort_large_stack(t_stack *stack_a, t_stack *stack_b);
+void    sort_large_stack(t_stack *stack_a, t_stack *stack_b);
 
 #endif

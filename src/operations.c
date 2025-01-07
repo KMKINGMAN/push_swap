@@ -6,7 +6,7 @@
 /*   By: mkurkar <mkurkar@student.42amman.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 15:34:16 by mkurkar           #+#    #+#             */
-/*   Updated: 2024/12/31 16:52:27 by mkurkar          ###   ########.fr       */
+/*   Updated: 2025/01/07 16:38:53 by mkurkar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,31 +29,30 @@ inline void push(t_stack *stack, int value)
     if (!new_node)
         return;
     new_node->value = value;
+    new_node->counter = 0;  // Initialize counter
     new_node->next = stack->top;
     stack->top = new_node;
     stack->size++;
 }
 
-// Combined swap operations
-inline void swap(t_stack *stack)
-{
-    if (stack->size < 2)
-        return;
-    int temp = stack->top->value;
-    stack->top->value = stack->top->next->value;
-    stack->top->next->value = temp;
-}
-
 void sa(t_stack *stack_a, int print)
 {
-    swap(stack_a);
+    if (stack_a->size < 2)
+        return;
+    int temp = stack_a->top->value;
+    stack_a->top->value = stack_a->top->next->value;
+    stack_a->top->next->value = temp;
     if (print)
         write(1, "sa\n", 3);
 }
 
 void sb(t_stack *stack_b, int print)
 {
-    swap(stack_b);
+    if (stack_b->size < 2)
+        return;
+    int temp = stack_b->top->value;
+    stack_b->top->value = stack_b->top->next->value;
+    stack_b->top->next->value = temp;
     if (print)
         write(1, "sb\n", 3);
 }
@@ -65,30 +64,32 @@ void ss(t_stack *stack_a, t_stack *stack_b)
     write(1, "ss\n", 3);
 }
 
-// Optimized rotate operations
-inline void rotate(t_stack *stack)
+void ra(t_stack *stack_a, int print)
 {
-    if (stack->size < 2)
+    if (stack_a->size < 2)
         return;
-    t_node *first = stack->top;
+    t_node *first = stack_a->top;
     t_node *last = first;
     while (last->next)
         last = last->next;
-    stack->top = first->next;
+    stack_a->top = first->next;
     first->next = NULL;
     last->next = first;
-}
-
-void ra(t_stack *stack_a, int print)
-{
-    rotate(stack_a);
     if (print)
         write(1, "ra\n", 3);
 }
 
 void rb(t_stack *stack_b, int print)
 {
-    rotate(stack_b);
+    if (stack_b->size < 2)
+        return;
+    t_node *first = stack_b->top;
+    t_node *last = first;
+    while (last->next)
+        last = last->next;
+    stack_b->top = first->next;
+    first->next = NULL;
+    last->next = first;
     if (print)
         write(1, "rb\n", 3);
 }

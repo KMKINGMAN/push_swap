@@ -56,6 +56,8 @@ ERASE				:= $(ECHO) $(ES_ERASE)
 GREP				:= grep --color=auto --exclude-dir=.git
 NORMINETTE			:= norminette `ls`
 
+LIBS_DIR = libft/libft.a gc_collector/libcollect.a
+
 # Default Make
 all: libft $(TARGETDIR)/$(TARGET)
 	@$(ERASE)
@@ -84,7 +86,7 @@ fclean: clean
 -include $(OBJECTS:.$(OBJEXT)=.$(DEPEXT))
 
 # Link
-$(TARGETDIR)/$(TARGET): $(OBJECTS)
+$(TARGETDIR)/$(TARGET): $(OBJECTS) $(LIBS_DIR)
 	@mkdir -p $(TARGETDIR)
 	$(CC) -o $(TARGETDIR)/$(TARGET) $^ $(LIB)
 
