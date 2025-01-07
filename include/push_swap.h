@@ -44,4 +44,9 @@ void    sort_three(t_stack *stack_a);
 void    sort_five(t_stack *stack_a, t_stack *stack_b);
 void    sort_large_stack(t_stack *stack_a, t_stack *stack_b);
 
+// Utils
+int     is_number(char *str);
+int     is_valid_integer(char *str);
+int     check_duplicates(t_stack *stack, int num);
+
 #endif
