@@ -6,7 +6,7 @@
 /*   By: mkurkar <mkurkar@student.42amman.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 15:35:13 by mkurkar           #+#    #+#             */
-/*   Updated: 2025/01/15 17:36:52 by mkurkar          ###   ########.fr       */
+/*   Updated: 2025/01/15 19:07:06 by mkurkar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int	main(int argc, char **argv)
 	if (argc < 2)
 		return (1);
 	if (!init_stacks(&stack_a, &stack_b))
-		return (1);
+		return (EXIT_FAILURE);
 	if (!parse_arguments(argc, argv, stack_a))
 		clean_exit(stack_a, stack_b, 1);
 	if (!is_already_sorted(stack_a) && stack_a->size > 1)

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Push_Swap Project Tree</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Monaco', monospace;
+            background: #1e1e1e;
+            color: #d4d4d4;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .tree {
+            margin: 20px;
+        }
+
+        .tree ul {
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .tree li {
+            list-style: none;
+            position: relative;
+            padding: 10px 0 0 25px;
+        }
+
+        .tree li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 20px;
+            width: 20px;
+            height: 1px;
+            background: #666;
+        }
+
+        .tree li::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background: #666;
+        }
+
+        .tree li:last-child::after {
+            height: 20px;
+        }
+
+        .folder {
+            color: #c98b3f;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .file {
+            color: #98c379;
+        }
+
+        .file:hover, .folder:hover {
+            text-decoration: underline;
+        }
+
+        .description {
+            color: #888;
+            font-size: 0.9em;
+            margin-left: 10px;
+        }
+
+        .function {
+            color: #569cd6;
+            margin-left: 5px;
+        }
+
+        .header {
+            background: #252526;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .title {
+            color: #61afef;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1 class="title">Push_Swap Project Structure</h1>
+        <p>A visualization of the project's file structure and components</p>
+    </div>
+    <div class="tree">
+        <ul>
+            <li>
+                <span class="folder">📁 push_swap/</span>
+                <ul>
+                    <li>
+                        <span class="folder">📁 src/</span>
+                        <ul>
+                            <li>
+                                <span class="file">📄 main.c</span>
+                                <span class="description">Program entry point and argument handling</span>
+                                <ul>
+                                    <li><span class="function">main()</span></li>
+                                    <li><span class="function">init_stacks()</span></li>
+                                    <li><span class="function">is_already_sorted()</span></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <span class="file">📄 operations.c</span>
+                                <span class="description">Basic stack operations</span>
+                                <ul>
+                                    <li><span class="function">sa(), sb(), ss()</span></li>
+                                    <li><span class="function">pa(), pb()</span></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <span class="file">📄 rotate_operations.c</span>
+                                <span class="description">Stack rotation operations</span>
+                                <ul>
+                                    <li><span class="function">ra(), rb(), rr()</span></li>
+                                    <li><span class="function">rra(), rrb(), rrr()</span></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <span class="file">📄 sort_utils.c</span>
+                                <span class="description">Sorting algorithms for small stacks</span>
+                                <ul>
+                                    <li><span class="function">sort_three()</span></li>
+                                    <li><span class="function">sort_five()</span></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <span class="file">📄 sort_large.c</span>
+                                <span class="description">Radix sort for large stacks</span>
+                                <ul>
+                                    <li><span class="function">sort_large_stack()</span></li>
+                                    <li><span class="function">assign_index()</span></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <span class="file">📄 parser_utils.c</span>
+                                <span class="description">Input parsing and validation</span>
+                                <ul>
+                                    <li><span class="function">parse_arguments()</span></li>
+                                    <li><span class="function">process_number()</span></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <span class="file">📄 error_utils.c</span>
+                                <span class="description">Error handling utilities</span>
+                                <ul>
+                                    <li><span class="function">clean_exit()</span></li>
+                                    <li><span class="function">handle_error()</span></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <span class="folder">📁 include/</span>
+                        <ul>
+                            <li>
+                                <span class="file">📄 push_swap.h</span>
+                                <span class="description">Main header file</span>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <span class="file">📄 Makefile</span>
+                        <span class="description">Build configuration</span>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>
