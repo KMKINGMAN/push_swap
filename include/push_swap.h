@@ -63,4 +63,7 @@ int     is_number(char *str);
 int     is_valid_integer(char *str);
 int     check_duplicates(t_stack *stack, int num);
 
+void	sort_two(t_stack *stack_a);
+void	move_min_to_top(t_stack *stack_a, int size);
+
 #endif

@@ -6,7 +6,7 @@
 /*   By: mkurkar <mkurkar@student.42amman.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 15:18:32 by mkurkar           #+#    #+#             */
-/*   Updated: 2025/01/15 18:44:28 by mkurkar          ###   ########.fr       */
+/*   Updated: 2025/01/15 18:48:06 by mkurkar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	get_stack_size(t_stack *stack)
 	return (stack->size);
 }
 
-static void	sort_two(t_stack *stack_a)
+void	sort_two(t_stack *stack_a)
 {
 	if (!stack_a || stack_a->size < 2)
 		return ;
