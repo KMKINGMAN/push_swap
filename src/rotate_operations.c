@@ -6,11 +6,29 @@
 /*   By: mkurkar <mkurkar@student.42amman.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 15:40:12 by mkurkar           #+#    #+#             */
-/*   Updated: 2025/01/07 17:07:51 by mkurkar          ###   ########.fr       */
+/*   Updated: 2025/01/15 17:30:22 by mkurkar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/push_swap.h"
+#include "push_swap.h"
+
+void	rb(t_stack *stack_b, int print)
+{
+	t_node	*first;
+	t_node	*last;
+
+	if (stack_b->size < 2)
+		return ;
+	first = stack_b->top;
+	last = first;
+	while (last->next)
+		last = last->next;
+	stack_b->top = first->next;
+	first->next = NULL;
+	last->next = first;
+	if (print)
+		write(1, "rb\n", 3);
+}
 
 void	rr(t_stack *stack_a, t_stack *stack_b)
 {

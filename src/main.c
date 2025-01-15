@@ -6,15 +6,11 @@
 /*   By: mkurkar <mkurkar@student.42amman.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 15:35:13 by mkurkar           #+#    #+#             */
-/*   Updated: 2025/01/07 18:30:44 by mkurkar          ###   ########.fr       */
+/*   Updated: 2025/01/15 17:36:52 by mkurkar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include "libft.h"
-#include <limits.h>
-#include <stdlib.h>
-#include <unistd.h>
 
 int	is_number(char *str)
 {
@@ -38,61 +34,6 @@ int	is_number(char *str)
 	return (1);
 }
 
-int	is_valid_integer(char *str)
-{
-	long	num;
-	int		sign;
-	int		i;
-
-	num = 0;
-	sign = 1;
-	i = 0;
-	if (str[i] == '-' || str[i] == '+')
-	{
-		sign = (str[i] == '-') ? -1 : 1;
-		i++;
-	}
-	while (str[i])
-	{
-		num = (num * 10) + (str[i] - '0');
-		if ((sign == 1 && num > INT_MAX) || (sign == -1 && num >
-				-(long)INT_MIN))
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
-int	check_duplicates(t_stack *stack, int num)
-{
-	t_node	*current;
-
-	current = stack->top;
-	while (current)
-	{
-		if (current->value == num)
-			return (1);
-		current = current->next;
-	}
-	return (0);
-}
-
-static int	is_already_sorted(t_stack *stack)
-{
-	t_node	*current;
-
-	if (!stack || !stack->top)
-		return (1);
-	current = stack->top;
-	while (current->next)
-	{
-		if (current->value >= current->next->value)
-			return (0);
-		current = current->next;
-	}
-	return (1);
-}
-
 void	sort_based_on_size(t_stack *stack_a, t_stack *stack_b)
 {
 	int	size;
@@ -106,74 +47,20 @@ void	sort_based_on_size(t_stack *stack_a, t_stack *stack_b)
 		sort_large_stack(stack_a, stack_b);
 }
 
-static void	free_split(char **split)
+int	is_already_sorted(t_stack *stack)
 {
-	int	i;
+	t_node	*current;
 
-	i = 0;
-	while (split[i])
+	if (!stack || !stack->top)
+		return (1);
+	current = stack->top;
+	while (current->next)
 	{
-		free(split[i]);
-		i++;
+		if (current->value >= current->next->value)
+			return (0);
+		current = current->next;
 	}
-	free(split);
-}
-
-static int	process_number(char *str, t_stack *stack_a)
-{
-	int	num;
-
-	if (!is_number(str) || !is_valid_integer(str))
-		return (0);
-	num = ft_atoi(str);
-	if (check_duplicates(stack_a, num))
-		return (0);
-	push(stack_a, num);
 	return (1);
-}
-
-void reverse_array(char **arr)
-{
-	int i;
-	int j;
-	char *temp;
-
-	i = 0;
-	j = 0;
-	while (arr[j])
-		j++;
-	j--;
-	while (i < j)
-	{
-		temp = arr[i];
-		arr[i] = arr[j];
-		arr[j] = temp;
-		i++;
-		j--;
-	}
-	
-}
-
-static int	process_argument(char *arg, t_stack *stack_a)
-{
-	char	**numbers;
-	int		i;
-	int		success;
-
-	numbers = ft_split(arg, ' ');
-	reverse_array(numbers);
-	if (!numbers)
-		return (0);
-	success = 1;
-	i = 0;
-	while (numbers[i] && success)
-	{
-		if (!process_number(numbers[i], stack_a))
-			success = 0;
-		i++;
-	}
-	free_split(numbers);
-	return (success);
 }
 
 static int	init_stacks(t_stack **stack_a, t_stack **stack_b)
@@ -191,34 +78,17 @@ static int	init_stacks(t_stack **stack_a, t_stack **stack_b)
 	return (1);
 }
 
-static void	clean_exit(t_stack *stack_a, t_stack *stack_b, int error)
-{
-	if (error)
-		write(2, "Error\n", 6);
-	if (stack_a)
-		free_stack(stack_a);
-	if (stack_b)
-		free_stack(stack_b);
-	exit(error);
-}
-
 int	main(int argc, char **argv)
 {
 	t_stack	*stack_a;
 	t_stack	*stack_b;
-	int		i;
 
 	if (argc < 2)
 		return (1);
 	if (!init_stacks(&stack_a, &stack_b))
 		return (1);
-	i = argc - 1;
-	while (i > 0)
-	{
-		if (!process_argument(argv[i], stack_a))
-			clean_exit(stack_a, stack_b, 1);
-		i--;
-	}
+	if (!parse_arguments(argc, argv, stack_a))
+		clean_exit(stack_a, stack_b, 1);
 	if (!is_already_sorted(stack_a) && stack_a->size > 1)
 		sort_based_on_size(stack_a, stack_b);
 	clean_exit(stack_a, stack_b, 0);

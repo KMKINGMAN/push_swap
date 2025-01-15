@@ -3,6 +3,9 @@
 
 # include <stdlib.h>
 # include <unistd.h>
+# include "g_collector.h"
+# include "libft.h"
+# include <limits.h>
 
 typedef struct s_node
 {
@@ -38,11 +41,22 @@ void    rrr(t_stack *stack_a, t_stack *stack_b);
 
 // Stack utility functions
 int     get_stack_size(t_stack *stack);
+int     is_already_sorted(t_stack *stack);  // Add this line
 
 // Sorting functions
 void    sort_three(t_stack *stack_a);
-void    sort_five(t_stack *stack_a, t_stack *stack_b);
-void    sort_large_stack(t_stack *stack_a, t_stack *stack_b);
+void    sort_five(t_stack *stack_a, t_stack* stack_b);
+void    sort_large_stack(t_stack *stack_a, t_stack* stack_b);
+void	sort_three_case(t_stack *stack_a, int first, int second, int third);
+
+// Parser utils
+int     process_number(char *str, t_stack *stack);  // Make sure this is here
+void    free_split(char **split);
+int     parse_arguments(int argc, char **argv, t_stack *stack);
+
+// Error utils
+void    clean_exit(t_stack *stack_a, t_stack *stack_b, int error);
+int     handle_error(t_stack *stack_a, t_stack *stack_b);
 
 // Utils
 int     is_number(char *str);
