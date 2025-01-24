@@ -6,37 +6,38 @@
 /*   By: mkurkar <mkurkar@student.42amman.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 15:40:12 by mkurkar           #+#    #+#             */
-/*   Updated: 2025/01/15 17:30:22 by mkurkar          ###   ########.fr       */
+/*   Updated: 2025/01/24 17:25:35 by mkurkar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	rb(t_stack *stack_b, int print)
-{
-	t_node	*first;
-	t_node	*last;
-
-	if (stack_b->size < 2)
-		return ;
-	first = stack_b->top;
-	last = first;
-	while (last->next)
-		last = last->next;
-	stack_b->top = first->next;
-	first->next = NULL;
-	last->next = first;
-	if (print)
-		write(1, "rb\n", 3);
-}
-
-void	rr(t_stack *stack_a, t_stack *stack_b)
-{
-	ra(stack_a, 0);
-	rb(stack_b, 0);
-	write(1, "rr\n", 3);
-}
-
+/**
+ * rra - Reverse rotate stack A.
+ * 
+ * This function performs a reverse rotation
+ *  on stack A, which means that the 
+ * last element of the stack becomes the first
+ *  one. If the `print` parameter 
+ * is set to a non-zero value, the function
+ *  will also print "rra" to the 
+ * standard output.
+ * 
+ * @param stack_a A pointer to the stack A 
+ * structure.
+ * @param print An integer flag to indicate 
+ * whether to print the operation.
+ * 
+ * Example:
+ * Before rra:
+ * stack_a: [1, 2, 3, 4, 5]
+ * 
+ * After rra:
+ * stack_a: [5, 1, 2, 3, 4]
+ * 
+ * If print is non-zero, the output will be:
+ * rra
+ */
 void	rra(t_stack *stack_a, int print)
 {
 	t_node	*last;
@@ -58,6 +59,32 @@ void	rra(t_stack *stack_a, int print)
 		write(1, "rra\n", 4);
 }
 
+/**
+ * @brief Reverses the rotation of stack_b 
+ * by moving the last element to the top.
+ *
+ * This function performs a reverse rotation 
+ * on the given stack_b. It moves the
+ * last element of the stack to the top. 
+ * If the stack is empty or has only one
+ * element, the function does nothing. 
+ * If the print flag is set, it prints "rrb"
+ * to the standard output.
+ *
+ * @param stack_b A pointer to the stack 
+ * (t_stack) to be rotated.
+ * @param print An integer flag indicating 
+ * whether to print the operation ("rrb\n").
+ *
+ * @example
+ * // Given stack_b: 1 -> 2 -> 3 -> 4
+ * rrb(stack_b, 1);
+ * // Resulting stack_b: 4 -> 1 -> 2 -> 3
+ *
+ * @note The function assumes that the stack 
+ * is implemented as a linked list
+ * where the top of the stack is the head of the list.
+ */
 void	rrb(t_stack *stack_b, int print)
 {
 	t_node	*last;
@@ -79,6 +106,31 @@ void	rrb(t_stack *stack_b, int print)
 		write(1, "rrb\n", 4);
 }
 
+/**
+ * @brief Perform a reverse rotate
+ * operation on both stack_a and stack_b.
+ *
+ * The function `rrr` performs a reverse 
+ * rotate operation on two stacks, `stack_a` and `stack_b`.
+ * This operation involves moving the bottom 
+ * element of each stack to the top.
+ * The function also writes "rrr\n" to the 
+ * standard output to indicate the operation.
+ *
+ * @param stack_a A pointer to the first stack (t_stack).
+ * @param stack_b A pointer to the second stack (t_stack).
+ *
+ * @example
+ * // Before rrr operation:
+ * // stack_a: [1, 2, 3, 4]
+ * // stack_b: [5, 6, 7, 8]
+ * 
+ * rrr(stack_a, stack_b);
+ * 
+ * // After rrr operation:
+ * // stack_a: [4, 1, 2, 3]
+ * // stack_b: [8, 5, 6, 7]
+ */
 void	rrr(t_stack *stack_a, t_stack *stack_b)
 {
 	rra(stack_a, 0);
