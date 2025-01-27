@@ -6,7 +6,7 @@
 /*   By: mkurkar <mkurkar@student.42amman.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 18:18:12 by mkurkar           #+#    #+#             */
-/*   Updated: 2025/01/24 18:17:44 by mkurkar          ###   ########.fr       */
+/*   Updated: 2025/01/27 21:54:53 by mkurkar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,6 +151,28 @@ static void	radix_sort_bit(t_stack *stack_a, t_stack *stack_b, int bit)
 }
 
 /**
+ * @brief Gets the maximum index value in the stack.
+ * 
+ * @param stack A pointer to the stack structure.
+ * @return The maximum index value in the stack.
+ */
+int	get_max_index(t_stack *stack)
+{
+	t_node	*current;
+	int		max;
+
+	current = stack->top;
+	max = 0;
+	while (current)
+	{
+		if (current->counter > max)
+			max = current->counter;
+		current = current->next;
+	}
+	return (max);
+}
+
+/**
  * @brief Sorts the stack using the radix sort algorithm.
  *
  * This function sorts the elements in
@@ -188,7 +210,7 @@ void	sort_large_stack(t_stack *stack_a, t_stack *stack_b)
 	if (!stack_a || stack_a->size < 2)
 		return ;
 	assign_index(stack_a);
-	max_bits = get_max_bits(stack_a->size);
+	max_bits = get_max_bits(get_max_index(stack_a));
 	i = 0;
 	while (i < max_bits)
 	{
